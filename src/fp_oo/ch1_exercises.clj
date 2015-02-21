@@ -23,3 +23,9 @@
     (apply + 
       (map (fn [n] (* n n)) numbers))))
 
+;; exercise 4
+(def factorial
+  (fn [n]
+    (apply *
+      (cons n (range 1 n)))))
+

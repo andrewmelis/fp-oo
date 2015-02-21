@@ -21,5 +21,9 @@
   (testing "sum the squares each element"
     (is (= 30 (add-squares 1 2 5)))
     (is (zero? (add-squares)))))
+
+(deftest factorial-test
+  (testing "factorial w/o iteration or recursion"
+    (is (= 120 (factorial 5)))))
     
 
