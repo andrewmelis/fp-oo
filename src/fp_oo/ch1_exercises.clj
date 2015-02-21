@@ -48,3 +48,10 @@
     (= candidate
        (take (count candidate)
              sequence))))
+
+;; exercise 7
+(def tails
+  (fn [sequence]
+    (map drop
+         (range (inc (count sequence)))
+         (repeat (inc (count sequence)) sequence))))
