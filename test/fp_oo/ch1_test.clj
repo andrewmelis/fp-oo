@@ -30,4 +30,12 @@
   (testing "third factorial w/ flatten"
     (is (= 120 (third-factorial 5)))))
     
+(deftest prefix-of?-test
+  (testing "returns true if elements in candidate are first elements in sequence"
+    (is (prefix-of? [1 2] [1 2 3 4]))
+    (not (prefix-of? '(2 3) [1 2 3 4]))
+    (is (prefix-of? '(1 2) [1 2 3 4]))))
 
+(deftest tails-test
+  (testing "returns sequence of successively smaller subsequences of the argument"
+    (is (= '((1 2 3 4) (2 3 4) (3 4) (4) ()) (tails '(1 2 3 4))))))

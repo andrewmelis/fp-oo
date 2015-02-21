@@ -41,3 +41,10 @@
     (apply *
       (flatten
         (list n (range 1 n))))))
+
+;; exercise 6
+(def prefix-of?
+  (fn [candidate sequence]
+    (= candidate
+       (take (count candidate)
+             sequence))))
