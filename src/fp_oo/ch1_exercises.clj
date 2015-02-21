@@ -55,3 +55,12 @@
     (map drop
          (range (inc (count sequence)))
          (repeat (inc (count sequence)) sequence))))
+
+;; exercise 8
+
+;; (def puzzle (fn [list] (list list))
+;; (puzzle '(1 2 3)
+;;  => ClassCastException clojure.lang.PersistentList cannot be cast to clojure.lang.IFn
+
+;; substitution rule for functions
+;; list argument is substituted into first element of method body list, throwing error
