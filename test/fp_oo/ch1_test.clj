@@ -10,13 +10,16 @@
     ;;(is (throw (my-second))))) how test error case?
 
 (deftest third-a-test
-  (testing "return third element of a list"
+  (testing "return third element of a list v1"
     (is (= 2 (third-a '(0 1 2))))
-    (is (= nil (third-a '())))
-    (is (= nil (third-a '(1))))))
-    
-(deftest third-b-test
-  (testing "return third element of a list"
+    (is (nil? (third-a '())))
+    (is (nil? (third-a '(1)))))
+  (testing "return third element of a list v2"
     (is (= 2 (third-b '(0 1 2))))))
+    
+(deftest add-squares-test
+  (testing "sum the squares each element"
+    (is (= 30 (add-squares 1 2 5)))
+    (is (zero? (add-squares)))))
     
 

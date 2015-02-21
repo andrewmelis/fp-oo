@@ -17,3 +17,9 @@
   (fn [list]
     (nth list 2)))
 
+;; exercise 3
+(def add-squares
+  (fn [& numbers]
+    (apply + 
+      (map (fn [n] (* n n)) numbers))))
+
