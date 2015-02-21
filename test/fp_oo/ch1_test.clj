@@ -24,6 +24,10 @@
 
 (deftest factorial-test
   (testing "factorial w/o iteration or recursion"
-    (is (= 120 (factorial 5)))))
+    (is (= 120 (factorial 5))))
+  (testing "other factorial w/ concat"
+    (is (= 120 (other-factorial 5))))
+  (testing "third factorial w/ flatten"
+    (is (= 120 (third-factorial 5)))))
     
 

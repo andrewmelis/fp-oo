@@ -29,3 +29,14 @@
     (apply *
       (cons n (range 1 n)))))
 
+;; exercise 5
+(def other-factorial
+  (fn [n]
+    (apply *
+      (concat (list n) (range 1 n))))) ; why not ' ?
+
+(def third-factorial
+  (fn [n]
+    (apply *
+      (flatten
+        (list n (range 1 n))))))
