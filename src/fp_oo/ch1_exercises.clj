@@ -21,19 +21,20 @@
 (def add-squares
   (fn [& numbers]
     (apply + 
-      (map (fn [n] (* n n)) numbers))))
+           (map (fn [n] (* n n)) numbers))))
+
 
 ;; exercise 4
 (def factorial
   (fn [n]
     (apply *
-      (cons n (range 1 n)))))
+           (cons n (range 1 n)))))
 
 ;; exercise 5
 (def other-factorial
   (fn [n]
     (apply *
-      (concat (list n) (range 1 n))))) ; why not ' ?
+           (concat (list n) (range 1 n))))) ; why not ' ?
 
 (def third-factorial
   (fn [n]
