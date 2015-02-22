@@ -4,9 +4,9 @@
 
 (deftest embedded-function-test
   (testing "passing in embedded functions"
-    (def actual (make Point 1 2))
+    (def sut (make Point 1 2))
     (is (= (:x (make Point -1 -1)) ;; must test state bc = fails with diff mem address
-           (:x ((:shift (:__methods__ actual)) actual -2 -3))))))
+           (:x ((:shift (:__methods__ sut)) sut -2 -3))))))
 
 (deftest send-to-test
   (testing "send-to serves as convenient way to call embedded methods"
@@ -25,4 +25,7 @@
     (testing "y"
       (def point (make Point 1 2))
       (is (= (:y point)
-             (send-to point :y))))))
+             (send-to point :y))))
+    (testing "coordinates"
+      (def point (make Point 1 2))
+      (is (= '(1 2) [(send-to point :x) (send-to point :y)] (send-to point :coordinates))))))

@@ -23,6 +23,9 @@
        :x :x
        :y :y
 
+       :coordinates
+       (fn [this] [(:x this) (:y this)])
+
        :shift
        (fn [this xinc yinc]
          (make Point (+ (send-to this :x) xinc)
