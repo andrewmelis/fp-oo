@@ -15,10 +15,16 @@
     (is (= 2 (y (Point 1 2))))
     (is (= 1 (x (Point 1 2))))))
 
-
 (deftest class-of-test
   (testing "returns symbol for 'object'"
     (is (= 'Point (class-of (Point 1 2))))))
+
+(deftest Triangle-constructor-test
+  (testing "can construct a Triangle"
+    (is (= 'Triangle
+           (class-of (Triangle (Point 0 0)
+                               (Point 0 1)
+                               (Point 1 0)))))))
 
 (deftest shift-test
   (testing "returns a new point with coordinates 'updated' by arguments"
