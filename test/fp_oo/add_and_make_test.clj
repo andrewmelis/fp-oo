@@ -66,3 +66,12 @@
       (is (equal-triangles? right-triangle right-triangle equal-right-triangle)))
     (testing "different"
       (not (equal-triangles? right-triangle equal-right-triangle different-triangle)))))
+
+(deftest valid-triangle?-test
+  (testing "invalid when has duplicate points"
+    (is (valid-triangle? (Point 0 0)
+                         (Point 1 1)
+                         (Point 2 2)))
+    (not (valid-triangle? (Point 0 0)
+                          (Point 0 0)
+                          (Point 2 2)))))
