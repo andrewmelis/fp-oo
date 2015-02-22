@@ -25,3 +25,13 @@
     (is (= (Point 0 0)
            (shift (Point 1 200) -1 -200)))))
 
+(deftest add-test
+  (testing "add implemented without shift"
+    (is (= (Point 0 0)
+           (add-without-shift (Point 100 200)
+                              (Point -100 -200)))))
+  (testing "add implemented with shift"
+    (is (= (Point 0 0)
+           (add (Point 100 200)
+                (Point -100 -200))))))
+

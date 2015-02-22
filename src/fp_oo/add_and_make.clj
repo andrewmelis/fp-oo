@@ -23,3 +23,13 @@
   (fn [this xinc yinc]
     (Point (+ (x this) xinc)
            (+ (y this) yinc))))
+
+;; exercise 1
+(def add-without-shift
+  (fn [p1 p2]
+    (Point (+ (x p1) (x p2))
+           (+ (y p1) (y p2)))))
+
+(def add
+  (fn [p1 p2]
+    (shift p1 (x p2) (y p2))))
