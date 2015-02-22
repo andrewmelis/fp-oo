@@ -29,3 +29,10 @@
     (testing "coordinates"
       (def point (make Point 1 2))
       (is (= '(1 2) [(send-to point :x) (send-to point :y)] (send-to point :coordinates))))))
+
+(deftest embedded-add-test
+  (testing "embedded add returns new point"
+    (def sut (make Point 1 2))
+    (def other (make Point -2 -3))
+    (is (= (send-to (make Point -1 -1) :coordinates)
+           (send-to (send-to sut :add other) :coordinates)))))

@@ -29,4 +29,9 @@
        :shift
        (fn [this xinc yinc]
          (make Point (+ (send-to this :x) xinc)
-                     (+ (send-to this :y) yinc)))}}))
+                     (+ (send-to this :y) yinc)))
+
+       :add
+       (fn [this other]
+         (send-to this :shift (send-to other :x)
+                              (send-to other :y)))}}))
