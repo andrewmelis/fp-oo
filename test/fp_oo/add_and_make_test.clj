@@ -41,3 +41,14 @@
            (add (Point 100 200)
                 (Point -100 -200))))))
 
+(deftest make-test
+  (testing "implement a Java-ish 'constructor'"
+    (testing "point"
+      (is (= (Point 1 2) (make Point 1 2))))
+    (testing "triangle"
+      (is (= (Triangle (Point 0 0)
+                       (Point 0 1)
+                       (Point 1 0))
+             (make Triangle (make Point 0 0)
+                            (make Point 0 1)
+                            (make Point 1 0)))))))

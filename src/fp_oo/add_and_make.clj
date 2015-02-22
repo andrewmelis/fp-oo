@@ -50,3 +50,8 @@
 (def add
   (fn [p1 p2]
     (shift p1 (x p2) (y p2))))
+
+;; exercise 2
+(def make
+  (fn [classname & args]
+    (apply classname args)))
