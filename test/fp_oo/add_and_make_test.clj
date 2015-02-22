@@ -52,3 +52,17 @@
              (make Triangle (make Point 0 0)
                             (make Point 0 1)
                             (make Point 1 0)))))))
+
+(deftest equal-triangles?-test
+  (testing "compare two triangles"
+    (testing "identical triangles"
+      (is (equal-triangles? right-triangle right-triangle)))
+    (testing "not identical, but contents equal"
+      (is (equal-triangles? right-triangle equal-right-triangle)))
+    (testing "different"
+      (not (equal-triangles? right-triangle different-triangle))))
+  (testing "compare > 2 triangles"
+    (testing "equal"
+      (is (equal-triangles? right-triangle right-triangle equal-right-triangle)))
+    (testing "different"
+      (not (equal-triangles? right-triangle equal-right-triangle different-triangle)))))

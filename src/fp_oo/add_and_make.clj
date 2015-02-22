@@ -55,3 +55,8 @@
 (def make
   (fn [classname & args]
     (apply classname args)))
+
+;; exercise 3 / 4
+(def equal-triangles?
+  (fn [& triangles]
+    (= triangles)))
