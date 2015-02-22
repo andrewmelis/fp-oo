@@ -20,7 +20,10 @@
      :__methods__ {
        :class :__class_symbol__
 
+       :x :x
+       :y :y
+
        :shift
        (fn [this xinc yinc]
-         (make Point (+ (:x this) xinc)
-                     (+ (:y this) yinc)))}}))
+         (make Point (+ (send-to this :x) xinc)
+                     (+ (send-to this :y) yinc)))}}))
