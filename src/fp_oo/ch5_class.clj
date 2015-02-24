@@ -1,25 +1,30 @@
 (ns fp-oo.ch5-class)
 
-(def verbose-make
-  (fn [class & args]
-    (let [allocated {}
-          seeded (assoc allocated
-                        :__class_symbol__ (:__own_symbol__ class))
-          constructor (:add-instance-values
-                        (:__instance_methods__ class))]
-      (apply constructor seeded args))))
+(def method-from-message
+  (fn [message class]
+    (message (:__instance_methods__ class))))
+
+(def apply-message-to
+  (fn [class instance message args]
+      (apply (method-from-message message class)
+             instance
+             args)))
 
 (def make
   (fn [class & args]
-    (let [seeded {:__class_symbol__ (:__own_symbol__ class)}
-          constructor (:add-instance-values (:__instance_methods__ class))]
-      (apply constructor seeded args))))
+    (let [seeded {:__class_symbol__ (:__own_symbol__ class)}]
+      (apply-message-to class seeded :add-instance-values args))))
+
+(def class-from-instance
+  (fn [instance]
+    (eval (:__class_symbol__ instance))))
 
 (def send-to
   (fn [instance message & args]
-    (let [class (eval (:__class_symbol__ instance))
-          method (message (:__instance_methods__ class))]
-      (apply method instance args))))
+    (apply-message-to (class-from-instance instance)
+                      instance
+                      message 
+                      args)))
 
 (def Point
   {
@@ -35,6 +40,6 @@
     :shift
     (fn [this xinc yinc]
       (make Point (+ (:x this) xinc)
-                  (+ (:y this) yinc)))
-   }
-  })
+            (+ (:y this) yinc)))
+    }
+   })
