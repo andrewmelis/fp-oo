@@ -30,3 +30,20 @@
 (def add-sequence-not-recursive
   (fn [something so-far]
     (apply + so-far something)))
+
+(def multiply-sequence
+  (fn [something so-far]
+    (if (empty? something)
+      so-far
+      (recur (rest something)
+             (* (first something) so-far)))))
+
+;; function named this way to match exercises
+;; this is really an implementation of reduce
+(def recursive-function
+  (fn [combiner something so-far]
+    (if (empty? something)
+      so-far
+      (recur combiner
+             (rest something)
+             (combiner (first something) so-far)))))
