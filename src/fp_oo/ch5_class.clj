@@ -6,9 +6,9 @@
 
 (def apply-message-to
   (fn [class instance message args]
-      (apply (method-from-message message class)
-             instance
-             args)))
+    (let [method (or (method-from-message message class)
+                     message)]
+      (apply method instance args))))
 
 (def make
   (fn [class & args]
@@ -43,5 +43,14 @@
     (fn [this xinc yinc]
       (make Point (+ (:x this) xinc)
             (+ (:y this) yinc)))
+    }
+   })
+
+(def Holder
+  {
+   :__own_symbol__ 'Holder
+   :__instance_methods__
+   {
+    :add-instance-values (fn [this held] (assoc this :held held))
     }
    })

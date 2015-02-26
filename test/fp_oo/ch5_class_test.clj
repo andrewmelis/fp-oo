@@ -34,3 +34,10 @@
 
     (let [point (make Point 1 2)]
       (is (= Point (send-to point :class))))))
+
+(deftest method-missing-instance-variables-test
+  (testing "apply-message-to searches for instance variables if no method found"
+    (is (= "stuff" (send-to (make Holder "stuff") :held)))
+    (is (nil? (send-to (make Holder "stuff") :not-held)))))
+
+
