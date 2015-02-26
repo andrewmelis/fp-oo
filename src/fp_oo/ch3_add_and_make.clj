@@ -61,5 +61,5 @@
 
 ;; exercise 5
 (def valid-triangle?
-  (fn [point1 point2 point3]
-    (= 3 (count (distinct [point1 point2 point3])))))
+  (fn [& points]
+    (= 3 (count (distinct points)))))
