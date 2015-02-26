@@ -35,7 +35,9 @@
     (fn [this x y]
       (assoc this :x x :y y))
 
-    :class :__class_symbol__
+    :class-name :__class_symbol__
+
+    :class (fn [this] (class-from-instance this))
 
     :shift
     (fn [this xinc yinc]
