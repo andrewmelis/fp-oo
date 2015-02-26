@@ -37,4 +37,15 @@
     (testing "multiplication"
       (is (= 1 (recursive-function * [1] 1)))
       (is (= 2 (recursive-function * [1 2] 1)))
-      (is (= 24 (recursive-function * [1 2 3 4] 1))))))
+      (is (= 24 (recursive-function * [1 2 3 4] 1)))))
+  (testing "alternate wildcard parameters to create map"
+    (testing "map zero to each key"
+      (is (= {:a 0, :b 0, :c 0}
+             (recursive-function zero-mapper ;; combiner
+                                 [:a :b :c]
+                                 {} ))))  ;; so-far
+    (testing "map index to each key"
+      (is (= {:a 1, :b 2, :c 3}
+             (recursive-function index-mapper ;; combiner
+                                 [:a :b :c]
+                                 {} ))))))  ;; so-far

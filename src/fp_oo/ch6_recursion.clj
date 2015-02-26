@@ -47,3 +47,11 @@
       (recur combiner
              (rest something)
              (combiner (first something) so-far)))))
+
+(def zero-mapper
+  (fn [key map]
+    (assoc map key 0)))
+
+(def index-mapper
+  (fn [key map]
+    (assoc map key (inc (count map))))) 
