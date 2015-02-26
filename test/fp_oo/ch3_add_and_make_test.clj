@@ -1,6 +1,6 @@
-(ns fp-oo.add-and-make-test
+(ns fp-oo.ch3-add-and-make-test
   (require [clojure.test :refer :all]
-           [fp-oo.add-and-make :refer :all]))
+           [fp-oo.ch3-add-and-make :refer :all]))
 
 (deftest Point-constructor-test
   (testing "can construct a Point and access 'instance variables'"
