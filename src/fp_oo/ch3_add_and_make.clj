@@ -57,9 +57,7 @@
     (apply classname args)))
 
 ;; exercise 3 / 4
-(def equal-triangles?
-  (fn [& triangles]
-    (= triangles)))
+(def equal-triangles? =)
 
 ;; exercise 5
 (def valid-triangle?
