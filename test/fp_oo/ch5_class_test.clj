@@ -40,4 +40,9 @@
     (is (= "stuff" (send-to (make Holder "stuff") :held)))
     (is (nil? (send-to (make Holder "stuff") :not-held)))))
 
+(deftest method-missing-returns-nil-test
+  (testing "sending an unknown message returns nil instead of throwing error"
+    (is (nil? (send-to (make Point 1 2) :some-unknown-message)))))
+
+
 
