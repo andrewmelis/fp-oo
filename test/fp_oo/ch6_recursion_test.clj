@@ -49,3 +49,19 @@
              (recursive-function index-mapper ;; combiner
                                  [:a :b :c]
                                  {} ))))))  ;; so-far
+(deftest reduce-test
+  (testing "works similar to custom implementation"
+    (testing "addition"
+      (is (= 10 (reduce + 0 [1 2 3 4]))))
+    (testing "multiplication"
+      (is (= 24 (reduce * 1 [1 2 3 4]))))
+    (testing "map zero to each key"
+      (is (= {:a 0, :b 0, :c 0}
+             (reduce (fn [map val] (assoc map val 0))
+                     {} 
+                     [:a :b :c]))))
+    (testing "map index to each key"
+      (is (= {:a 1, :b 2, :c 3}
+             (reduce (fn [map val] (assoc map val (inc (count map))))
+                     {}
+                     [:a :b :c]))))))
