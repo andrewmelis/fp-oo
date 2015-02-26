@@ -1,4 +1,4 @@
-(ns fp-oo.add-and-make)
+(ns fp-oo.ch3-add-and-make)
 
 (def Point
   (fn [x y]
