@@ -1,6 +1,6 @@
-(ns fp-oo.embedded-functions-test
+(ns fp-oo.ch4-embedded-functions-test
   (require [clojure.test :refer :all]
-           [fp-oo.embedded-functions :refer :all]))
+           [fp-oo.ch4-embedded-functions :refer :all]))
 
 (deftest embedded-function-test
   (testing "passing in embedded functions"

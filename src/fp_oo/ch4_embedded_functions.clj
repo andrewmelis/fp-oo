@@ -1,4 +1,4 @@
-(ns fp-oo.embedded-functions)
+(ns fp-oo.ch4-embedded-functions)
   ; (require [fp-oo.add-and-make :refer [make]])) ;;this isn't working
 
 (def make
