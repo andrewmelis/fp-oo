@@ -18,3 +18,15 @@
 (def alt-factorial
   (fn [n]
     (factorial-n-greater-than-1 n 1)))
+
+(def add-sequence
+  (fn [something so-far]
+    (if (empty? something)
+      so-far
+      (recur (rest something)
+             (+ (first something) so-far)))))
+
+;; apparently this is cheating
+(def add-sequence-not-recursive
+  (fn [something so-far]
+    (apply + so-far something)))

@@ -14,4 +14,10 @@
     (is (= 2 (alt-factorial 2)))
     (is (= 120 (alt-factorial 5)))))
 
-
+(deftest add-sequence-test
+  (testing "can sum a sequence of numbers using collecting variable pattern"
+    (is (= 1 (add-sequence [1] 0)))
+    (is (= 3 (add-sequence [1 2] 0)))
+    (is (= 10 (add-sequence [1 2 3 4] 0))))
+  (testing "cheating"
+    (is (= 10 (add-sequence-not-recursive [1 2 3 4] 0)))))
