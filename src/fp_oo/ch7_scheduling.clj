@@ -1,8 +1,8 @@
 (ns fp-oo.ch7-scheduling)
 
 (def answer-annotations
-  (fn [courses registrants-courses]
-    (let [checking-set (set registrants-courses)]
+  (fn [courses registrant-info]
+    (let [checking-set (set (:courses registrant-info))]
       (map (fn [course]
              (assoc course
                     :spaces-left (- (:limit course)
@@ -20,24 +20,27 @@
          courses)))
 
 (def note-unavailability
-  (fn [courses instructor-count]
+  (fn [courses instructor-count manager?]
     (let [out-of-instructors?
           (= instructor-count
              (count (filter (fn [course] (not (:empty? course)))
                             courses)))]
       (map (fn [course]
              (assoc course
-                    :unavailable? (or (:full? course)
+                    :unavailable? (or (and manager?
+                                           (not (:morning? course)))
+                                      (:full? course)
                                       (and out-of-instructors?
                                            (:empty? course)))))
            courses))))
 
 (def annotate
-  (fn [courses registrants-courses instructor-count]
-    (-> courses
-        (answer-annotations registrants-courses)
-        domain-annotations
-        (note-unavailability instructor-count))))
+  (fn [courses registrant-info instructor-count]
+    (let [manager? (or (:manager? registrant-info) false)]
+      (-> courses
+          (answer-annotations registrant-info)
+          domain-annotations
+          (note-unavailability instructor-count manager?)))))
 
 (def separate
   (fn [predicate sequence]
@@ -56,17 +59,17 @@
            courses))))
 
 (def half-day-solution
-  (fn [courses registrants-courses instructor-count]
+  (fn [courses registrant-info instructor-count]
     (-> courses
-        (annotate registrants-courses instructor-count)
+        (annotate registrant-info instructor-count)
         visible-courses
         ((fn [courses] (sort-by :course-name courses)))
         final-shape)))
 
 (def solution
-  (fn [courses registrants-courses instructor-count]
+  (fn [courses registrant-info instructor-count]
     (map (fn [courses]
            (half-day-solution courses
-                              registrants-courses
+                              registrant-info
                               instructor-count))
-           (separate :morning? courses))))
+         (separate :morning? courses))))
