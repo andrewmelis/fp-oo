@@ -6,7 +6,7 @@
   (fact "adds spaces-left and already-in? to course map"
     (answer-annotations [{:course-name "zigging" :limit 4, :registered 3}
                          {:course-name "zagging" :limit 1, :registered 1}]
-                        {:courses ["zagging"]})
+                        {:taking-now ["zagging"]})
     => [{:already-in? false, :spaces-left 1, :registered 3, :limit 4, :course-name "zigging"}
         {:already-in? true, :spaces-left 0, :registered 1, :limit 1, :course-name "zagging"}]))
 
@@ -34,13 +34,23 @@
       (note-unavailability [{:full? false, :empty? false}] 1 false)
       => [{:unavailable? false, :full? false, :empty? false}]))
   (fact "when registrant is a manager"
-    (note-unavailability [{:morning? false}] 1 true)
-    => [{:unavailable? true, :morning? false}]))
+    (note-unavailability [{:morning? false}] 1 {:manager? true})
+    => [{:unavailable? true, :morning? false}])
+  (facts "course prerequisites"
+    (fact "when course has no prerequisites"
+      (note-unavailability [{}] 0 false)
+      => [{:unavailable? false}])
+    (fact "when registrant has not met course prerequisites"
+      (note-unavailability [{:prerequisites ["prereq"]}] 0 {})
+      => [{:unavailable? true, :prerequisites ["prereq"]}])
+    (fact "when registrant has met course prerequisites"
+      (note-unavailability [{:prerequisites ["prereq"]}] 0 {:past-courses ["prereq"]})
+      => [{:unavailable? false, :prerequisites ["prereq"]}])))
 
 (facts "annotate fills the input maps with the necessary information"
   (fact "it adds spaces-left, already-in?, empty?, full?, and unavailable?"
     (annotate [{:course-name "Zigging", :morning? true, :limit 5, :registered 3}]
-              {:courses ["Zigging"]}
+              {:taking-now ["Zigging"]}
               1)
     => [{:course-name "Zigging", :morning? true, :limit 5, :registered 3,
          :unavailable? false, :full? false, :empty? false, :spaces-left 2, :already-in? true}]))
@@ -74,18 +84,18 @@
                         {:course-name "Thinking", :morning? true, :limit 7, :registered 2}
                         {:course-name "Drinking", :morning? true, :limit 9, :registered 0}
                         {:course-name "Flopping", :morning? true, :limit 4, :registered 0}]
-                       {:courses ["Zigging"]}
+                       {:taking-now ["Zigging"]}
                        4)
     => [{:course-name "Drinking" :morning? true, :registered 0, :spaces-left 9, :already-in? false}
         {:course-name "Flopping" :morning? true, :registered 0, :spaces-left 4, :already-in? false}
         {:course-name "Thinking" :morning? true, :registered 2, :spaces-left 5, :already-in? false}
         {:course-name "Zigging" :morning? true, :registered 3, :spaces-left 2, :already-in? true}]))
 
-(facts "solution"
+(facts "solution" ;; integration style test
   (fact "it processes half-days separately and outputs"
-    (solution [{:course-name "Zigging", :morning? true, :limit 5, :registered 3}
+    (solution [{:prerequisites ["prereq"], :course-name "Zigging", :morning? true, :limit 5, :registered 3}
                {:course-name "Zagging", :morning? true, :limit 3, :registered 3}
-               {:course-name "Thinking", :morning? true, :limit 7, :registered 2}
+               {:prerequisites ["Zigging"], :course-name "Thinking", :morning? true, :limit 7, :registered 2}
                {:course-name "Drinking", :morning? true, :limit 9, :registered 0}
                {:course-name "Flopping", :morning? true, :limit 4, :registered 0}
                {:course-name "Zigging", :morning? false, :limit 5, :registered 3}
@@ -93,13 +103,9 @@
                {:course-name "Thinking", :morning? false, :limit 7, :registered 2}
                {:course-name "Drinking", :morning? false, :limit 9, :registered 0}
                {:course-name "Flopping", :morning? false, :limit 4, :registered 0}]
-              {:courses ["Zigging"]} ;; how does this account for morning or afternoon?
+              {:past-courses ["prereq"], :manager? true, :taking-now ["Zigging"]} ;; how does this account for morning or afternoon?
               4)
     => [[{:course-name "Drinking" :morning? true, :registered 0, :spaces-left 9, :already-in? false}
-        {:course-name "Flopping" :morning? true, :registered 0, :spaces-left 4, :already-in? false}
-        {:course-name "Thinking" :morning? true, :registered 2, :spaces-left 5, :already-in? false}
-        {:course-name "Zigging" :morning? true, :registered 3, :spaces-left 2, :already-in? true}]
-        [{:course-name "Drinking" :morning? false, :registered 0, :spaces-left 9, :already-in? false}
-        {:course-name "Flopping" :morning? false, :registered 0, :spaces-left 4, :already-in? false}
-        {:course-name "Thinking" :morning? false, :registered 2, :spaces-left 5, :already-in? false}
-        {:course-name "Zigging" :morning? false, :registered 3, :spaces-left 2, :already-in? true}]]))
+         {:course-name "Flopping" :morning? true, :registered 0, :spaces-left 4, :already-in? false}
+         {:course-name "Zigging" :morning? true, :registered 3, :spaces-left 2, :already-in? true}]
+        [{:course-name "Zigging" :morning? false, :registered 3, :spaces-left 2, :already-in? true}]]))
