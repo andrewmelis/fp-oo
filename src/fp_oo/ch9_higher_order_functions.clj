@@ -83,29 +83,18 @@
   (fn [x]
     (comp first (partial list x))))    ;; ok...so (eval first) returns an f?
 
-(def check-sum
-  (fn [seq checker-sequence]
-    (apply + (map *
-                  checker-sequence
-                  seq))))
-
-(def isbn-check-sum
-  (fn [seq]
-    (check-sum seq
-               (map inc (range)))))   ;; range is lazy, but can't start at 0
-
-(def upc-check-sum
-  (fn [seq]
-    (check-sum seq
-               (flatten (repeat [1 3])))))    ;; repeat is lazy
-
-
-;; following method provided by author, uses Java interoperability
+;; reversed-digits  provided by author, uses Java interoperability
 (def reversed-digits
   (fn [string]
     (map (fn [digit-char]
            (-> digit-char str Integer.))
          (reverse string))))
+
+(def check-sum
+  (fn [seq checker-sequence]
+    (apply + (map *
+                  checker-sequence
+                  seq))))
 
 (def number-checker
   (fn [checker-sequence divisor]
@@ -116,12 +105,12 @@
           (rem divisor)
           zero?))))
 
+(def isbn-checksum-sequence (map inc (range)))   ;; range is lazy, but can't start at 0
+
 (def isbn?
-  (number-checker
-           (map inc (range))
-           11))
+  (number-checker isbn-checksum-sequence 11))
+
+(def upc-checksum-sequence (flatten (repeat [1 3])))   ;; repeat is lazy
 
 (def upc?
-  (number-checker
-    (flatten (repeat [1 3]))
-    10))
+  (number-checker upc-checksum-sequence 10))

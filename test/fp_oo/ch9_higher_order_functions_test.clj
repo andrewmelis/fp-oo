@@ -122,14 +122,16 @@
   (facts "helpers"
     (facts "check-sum"
       (fact "works on given"
-        (isbn-check-sum [4 8 9 3 2])
+        (check-sum [4 8 9 3 2]
+                   isbn-checksum-sequence)
         => (+ (* 1 4)
               (* 2 8)
               (* 3 9)
               (* 4 3)
               (* 5 2)))
       (fact "accepts any number of arguments"
-        (isbn-check-sum [2 3 1 6 5 7 4 9])
+        (check-sum [2 3 1 6 5 7 4 9]
+                   isbn-checksum-sequence)
         => (+ (* 1 2)
               (* 2 3)
               (* 3 1)
@@ -149,9 +151,10 @@
                     "722252601404"]))
     => '(false true true))
   (facts "helpers"
-    (facts "upc-checksum"
+    (facts "check-sum"
       (fact "odd positions multiplied by 1, evens multiplied by 3"
-        (upc-check-sum [4 8 9 3 2])
+        (check-sum [4 8 9 3 2]
+                   upc-checksum-sequence)
         => (+ (* 1 4)
               (* 3 8)
               (* 1 9)
