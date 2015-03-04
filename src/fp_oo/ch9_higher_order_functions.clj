@@ -66,3 +66,8 @@
 (def old-separate
   (fn [predicate sequence]
     [(filter predicate sequence) (remove predicate sequence)]))
+
+(def closure
+  ( (fn [x]
+      (fn [] x)) 3)   ;; this is all the body
+  )    ;; this was tricky; was worred about accidentally accepting args to top-level fn

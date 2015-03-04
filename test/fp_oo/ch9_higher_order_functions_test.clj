@@ -78,3 +78,11 @@
   (fact "myfun serves as a closure for x"
     (myfun)
     => 3))
+
+(fact "ex4 - substitution rule WITHOUT let"
+  ;(fact "can't access x outside scope of method"
+  ;  (x)
+  ;  => throws RunTimeException)    ;; can't get the throws checker to work..
+  (fact "myfun serves as a closure for x"
+    (closure)
+    => 3))
