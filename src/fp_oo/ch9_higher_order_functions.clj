@@ -84,31 +84,37 @@
     (comp first (partial list x))))    ;; ok...so (eval first) returns an f?
 
 (def check-sum
-  (fn [seq]
+  (fn [seq checker-sequence]
     (apply + (map *
-                  (range 1 (inc (count seq)))
+                  checker-sequence
                   seq))))
+
+(def isbn-check-sum
+  (fn [seq]
+    (check-sum seq
+               (range 1 (inc (count seq))))))
+
+(def upc-check-sum
+  (fn [seq]
+    (check-sum seq
+               (flatten (repeat [1 3])))))
+
 
 ;; following method provided by author, uses Java interoperability
 (def reversed-digits
-     (fn [string]
-       (map (fn [digit-char]
-              (-> digit-char str Integer.))
-            (reverse string))))
+  (fn [string]
+    (map (fn [digit-char]
+           (-> digit-char str Integer.))
+         (reverse string))))
 
 (def isbn?
   (fn [candidate]
     (-> candidate
         reversed-digits
-        check-sum
+        isbn-check-sum
         (rem 11)
         zero?)))
 
-(def upc-check-sum
-  (fn [seq]
-    (apply + (map *
-                  (flatten (repeat [1 3]))
-                  seq))))
 
 (def upc?
   (fn [candidate]

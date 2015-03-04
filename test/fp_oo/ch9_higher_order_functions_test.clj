@@ -122,14 +122,14 @@
   (facts "helpers"
     (facts "check-sum"
       (fact "works on given"
-        (check-sum [4 8 9 3 2])
+        (isbn-check-sum [4 8 9 3 2])
         => (+ (* 1 4)
               (* 2 8)
               (* 3 9)
               (* 4 3)
               (* 5 2)))
       (fact "accepts any number of arguments"
-        (check-sum [2 3 1 6 5 7 4 9])
+        (isbn-check-sum [2 3 1 6 5 7 4 9])
         => (+ (* 1 2)
               (* 2 3)
               (* 3 1)
