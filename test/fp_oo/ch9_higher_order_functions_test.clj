@@ -67,3 +67,14 @@
   (fact "redefine separate"
     (separate odd? [1 2 3])
     => (old-separate odd? [1 2 3])))
+
+(fact "ex3 - substitution rule"
+  (def myfun
+    (let [x 3]
+      (fn [] x)))
+  ;(fact "can't access x outside scope of method"
+  ;  (x)
+  ;  => throws RunTimeException)    ;; can't get the throws checker to work..
+  (fact "myfun serves as a closure for x"
+    (myfun)
+    => 3))
