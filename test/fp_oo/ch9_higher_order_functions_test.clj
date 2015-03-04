@@ -92,3 +92,23 @@
     (def my-atom (atom 0))
     (swap! my-atom atom-equal-to-33)
     => 33))
+
+(facts "ex6 - always"
+  (facts "always"
+    ( (always 8))  ;; so i guess this is point-free, even if author's apply method isn't
+    => 8
+    ( (always 8) 1 'a :foo)
+    => 8)
+  (facts "define always in point-free style"
+    ((point-free-always 8))
+    => 8
+    ( (point-free-always 8) 1 'a :foo)
+    => 8)
+  (fact "works the same as clojure.core/constantly"
+    ( (point-free-always 9) [1 'a] :foo)
+    => ( (constantly 9) [1 'a] :foo))
+  (fact "works with atoms"
+    (swap! (atom 22) (always 899))
+    => 899
+    (swap! (atom 55) (constantly 9))
+    => 9))

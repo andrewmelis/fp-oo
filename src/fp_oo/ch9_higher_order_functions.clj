@@ -74,3 +74,11 @@
 
 (def atom-equal-to-33  ;; 33 is the body here
   (fn [& throwaways] 33))    ;; don't even need to make (and deref) a throwaway atom
+
+(def always       ;; this is author's solution -- how is this point-free?
+  (fn [x]
+    (fn [& throwaways] x)))
+
+(def point-free-always
+  (fn [x]
+    (comp first (partial list x))))    ;; ok...so (eval first) returns an f?
