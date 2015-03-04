@@ -59,3 +59,11 @@
   (fact "can use comp to compose two inc functions"
     (map (comp inc inc) [1 2 3])
     => (map (fn [n] (+ 2 n)) [1 2 3])))
+
+(facts "ex2 - about juxt"
+  (fact "runs several functions on input args and returns them in one vector"
+    ((juxt empty? reverse count) [1 2 3])
+    => [false [3 2 1] 3])
+  (fact "redefine separate"
+    (separate odd? [1 2 3])
+    => (old-separate odd? [1 2 3])))

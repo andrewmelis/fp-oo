@@ -59,3 +59,10 @@
   (fn [x] (+ 5 x)))
 
 (def point-free-inc5 (partial + 5))
+
+;; exercises
+(def separate (juxt filter remove))
+
+(def old-separate
+  (fn [predicate sequence]
+    [(filter predicate sequence) (remove predicate sequence)]))
