@@ -92,12 +92,12 @@
 (def isbn-check-sum
   (fn [seq]
     (check-sum seq
-               (range 1 (inc (count seq))))))
+               (map inc (range)))))   ;; range is lazy
 
 (def upc-check-sum
   (fn [seq]
     (check-sum seq
-               (flatten (repeat [1 3])))))
+               (flatten (repeat [1 3])))))    ;; repeat is lazy
 
 
 ;; following method provided by author, uses Java interoperability
