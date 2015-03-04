@@ -18,3 +18,37 @@
 
 (def incish
   (partial map + [100 200 300]))
+
+;; lifting functions
+(def value-odd?
+  (fn [x] (not (even? x)))) ;; not operates on eval of (even? x)
+
+(def complement-odd?
+  (complement even?)) ;; complement operates on the function even?
+
+(def my-complement
+  (fn [function]
+    (fn [x] (not (function x))))) ;; this is the "same" as my-odd?
+
+(def my-complement-odd?
+  (my-complement even?))
+
+(def one-off-negate
+  (fn [function]
+    (fn [& args] (- (apply function args)))))
+
+(def honest-return
+  (fn [& args] 3.0))
+
+(def one-off-madoffize
+  (fn [function]
+    (fn [& args] ( * 1.05 (apply function args)))))
+
+(def lift
+  (fn [modifier]
+    (fn [base-function]
+      (fn [& args] (modifier (apply base-function args))))))
+
+(def lifted-negate (lift -))
+
+(def lifted-madoffize (lift (partial * 1.05)))
