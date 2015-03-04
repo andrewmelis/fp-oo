@@ -114,7 +114,12 @@
     => 9))
 
 (facts "isbn? accepts a string, returns boolean"
-  (facts "ensures that a checksum can be divided by 11 to leave remainder of 0"
+  (fact "valid isbn has checksum that can be divided by 11 with remainder 0"
+    (sort (map isbn? ["0131774115"
+                      "0977716614"
+                      "1934356190"]))
+    => '(false true true))
+  (facts "helpers"
     (facts "check-sum"
       (fact "works on given"
         (check-sum [4 8 9 3 2])
@@ -133,6 +138,6 @@
               (* 6 7)
               (* 7 4)
               (* 8 9))))
-    (facts "reversed-digits -- provided by author"
+    (fact "reversed-digits -- provided by author"
       (reversed-digits "123")
       => [3 2 1])))

@@ -95,3 +95,11 @@
        (map (fn [digit-char]
               (-> digit-char str Integer.))
             (reverse string))))
+
+(def isbn?
+  (fn [candidate]
+    (-> candidate
+        reversed-digits
+        check-sum
+        (rem 11)
+        zero?)))
