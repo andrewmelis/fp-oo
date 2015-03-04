@@ -72,8 +72,8 @@
       (fn [] x)) 3)   ;; this is all the body
   )    ;; this was tricky; was worred about accidentally accepting args to top-level fn
 
-(def atom-equal-to-33  ;; 33 is the body here
-  (fn [& throwaways] 33))    ;; don't even need to make (and deref) a throwaway atom
+(def atom-equal-to-33
+  (fn [& throwaways] 33))
 
 (def always       ;; this is author's solution -- how is this point-free?
   (fn [x]
@@ -81,7 +81,7 @@
 
 (def point-free-always
   (fn [x]
-    (comp first (partial list x))))    ;; ok...so (eval first) returns an f?
+    (comp first (partial list x))))
 
 ;; reversed-digits  provided by author, uses Java interoperability
 (def reversed-digits
