@@ -88,3 +88,10 @@
     (apply + (map *
                   (range 1 (inc (count seq)))
                   seq))))
+
+;; following method provided by author, uses Java interoperability
+(def reversed-digits
+     (fn [string]
+       (map (fn [digit-char]
+              (-> digit-char str Integer.))
+            (reverse string))))
