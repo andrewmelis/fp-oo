@@ -52,3 +52,10 @@
 (def lifted-negate (lift -))
 
 (def lifted-madoffize (lift (partial * 1.05)))
+
+;; point-free definitions
+
+(def named-inc5
+  (fn [x] (+ 5 x)))
+
+(def point-free-inc5 (partial + 5))

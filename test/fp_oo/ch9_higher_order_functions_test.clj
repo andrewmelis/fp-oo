@@ -38,6 +38,16 @@
     ( (lifted-madoffize honest-return) {:account 123})
     => (roughly 3.15)))
 
+(facts "point-free definitions"
+  (fact "can write method definitions without naming parameters"
+    (named-inc5 3)
+    => (point-free-inc5 3))
+  (fact "can use comp to 'compose' several functions in right to left order"
+    ( (comp str +) 8 8 8)
+    => "24"
+    ( (comp (partial * 2) + ) 8 8 8)
+    => 48))
+
 (facts "ex1 - without using fn"
   (fact "can use partials"
     (fact "can use a partial on the f passed to map"
