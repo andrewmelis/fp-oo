@@ -1,5 +1,6 @@
-(ns fp-oo.ch9_higher_order_functions_test
-  (require [midje.sweet :refer :all]))
+(ns fp-oo.ch9-higher-order-functions-test
+  (require [midje.sweet :refer :all]
+           [fp-oo.ch9-higher-order-functions :refer :all]))
 
 (facts "ex1 - without using fn"
   (fact "can use partials"
