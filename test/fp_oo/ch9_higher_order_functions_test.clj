@@ -112,3 +112,22 @@
     => 899
     (swap! (atom 55) (constantly 9))
     => 9))
+
+(facts "ex7 check-sum"
+  (fact "works on given"
+    (check-sum [4 8 9 3 2])
+    => (+ (* 1 4)
+          (* 2 8)
+          (* 3 9)
+          (* 4 3)
+          (* 5 2)))
+  (fact "accepts any number of arguments"
+    (check-sum [2 3 1 6 5 7 4 9])
+    => (+ (* 1 2)
+          (* 2 3)
+          (* 3 1)
+          (* 4 6)
+          (* 5 5)
+          (* 6 7)
+          (* 7 4)
+          (* 8 9))))

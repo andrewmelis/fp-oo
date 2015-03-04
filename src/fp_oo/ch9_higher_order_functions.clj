@@ -82,3 +82,9 @@
 (def point-free-always
   (fn [x]
     (comp first (partial list x))))    ;; ok...so (eval first) returns an f?
+
+(def check-sum
+  (fn [seq]
+    (apply + (map *
+                  (range 1 (inc (count seq)))
+                  seq))))
