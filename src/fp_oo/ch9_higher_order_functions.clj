@@ -92,7 +92,7 @@
 (def isbn-check-sum
   (fn [seq]
     (check-sum seq
-               (map inc (range)))))   ;; range is lazy
+               (map inc (range)))))   ;; range is lazy, but can't start at 0
 
 (def upc-check-sum
   (fn [seq]
@@ -107,19 +107,20 @@
            (-> digit-char str Integer.))
          (reverse string))))
 
-(def isbn?
-  (fn [candidate]
+(def number-checker
+  (fn [checker-sequence divisor candidate]
     (-> candidate
         reversed-digits
-        isbn-check-sum
-        (rem 11)
+        (check-sum checker-sequence)
+        (rem divisor)
         zero?)))
 
+(def isbn?
+  (partial number-checker
+           (map inc (range))
+           11))
 
 (def upc?
-  (fn [candidate]
-    (-> candidate
-        reversed-digits
-        upc-check-sum
-        (rem 10)
-        zero?)))
+  (partial number-checker
+           (flatten (repeat [1 3]))
+           10))
