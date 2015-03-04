@@ -108,19 +108,20 @@
          (reverse string))))
 
 (def number-checker
-  (fn [checker-sequence divisor candidate]
-    (-> candidate
-        reversed-digits
-        (check-sum checker-sequence)
-        (rem divisor)
-        zero?)))
+  (fn [checker-sequence divisor]
+    (fn [candidate]
+      (-> candidate
+          reversed-digits
+          (check-sum checker-sequence)
+          (rem divisor)
+          zero?))))
 
 (def isbn?
-  (partial number-checker
+  (number-checker
            (map inc (range))
            11))
 
 (def upc?
-  (partial number-checker
-           (flatten (repeat [1 3]))
-           10))
+  (number-checker
+    (flatten (repeat [1 3]))
+    10))
