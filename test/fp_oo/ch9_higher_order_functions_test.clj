@@ -141,3 +141,19 @@
     (fact "reversed-digits -- provided by author"
       (reversed-digits "123")
       => [3 2 1])))
+
+(facts "upc?"
+  (fact "valid upc has check sum divisble by 10 with remainder 0"
+    (sort (map upc? ["074182265830"
+                    "731124100023"
+                    "722252601404"]))
+    => '(false true true))
+  (facts "helpers"
+    (facts "upc-checksum"
+      (fact "odd positions multiplied by 1, evens multiplied by 3"
+        (upc-check-sum [4 8 9 3 2])
+        => (+ (* 1 4)
+              (* 3 8)
+              (* 1 9)
+              (* 3 3)
+              (* 1 2))))))

@@ -103,3 +103,17 @@
         check-sum
         (rem 11)
         zero?)))
+
+(def upc-check-sum
+  (fn [seq]
+    (apply + (map *
+                  (flatten (repeat [1 3]))
+                  seq))))
+
+(def upc?
+  (fn [candidate]
+    (-> candidate
+        reversed-digits
+        upc-check-sum
+        (rem 10)
+        zero?)))
