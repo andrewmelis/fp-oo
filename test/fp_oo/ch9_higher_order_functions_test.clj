@@ -86,3 +86,9 @@
   (fact "myfun serves as a closure for x"
     (closure)
     => 3))
+
+(facts "ex5 - make atom always = 3"
+  (facts "accept any arguments and always return 3"
+    (def my-atom (atom 0))
+    (swap! my-atom atom-equal-to-33)
+    => 33))

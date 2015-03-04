@@ -71,3 +71,6 @@
   ( (fn [x]
       (fn [] x)) 3)   ;; this is all the body
   )    ;; this was tricky; was worred about accidentally accepting args to top-level fn
+
+(def atom-equal-to-33  ;; 33 is the body here
+  (fn [& throwaways] 33))    ;; don't even need to make (and deref) a throwaway atom
