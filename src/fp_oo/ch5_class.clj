@@ -37,7 +37,7 @@
 
     :class-name :__class_symbol__
 
-    :class (fn [this] (class-from-instance this))
+    :class class-from-instance
 
     :shift
     (fn [this xinc yinc]
