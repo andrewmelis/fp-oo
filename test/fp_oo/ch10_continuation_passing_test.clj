@@ -46,3 +46,18 @@
                step2-value (* (inc step1-value) 3)]
         (dec step2-value)))
     => nil))
+
+;; 10.2
+(facts "continuation-passing style"
+  (fact "break a function into a 'result' and a 'rest of computation'"
+    (+ (* (+ 1 2) 3) 4)
+    => (-> (+ 1 2)    ;; step 1 result
+           ((fn [step1-value]   ;; rest of computation
+              (+ (* step1-value 3) 4)))))
+  (fact "break down 'rest of computation' further into continuation-passing style"
+    (+ (* (+ 1 2) 3) 4)
+    => (-> (+ 1 2)
+           ((fn [step1-value]
+              (-> (* step1-value 3)
+                  ((fn [step2-value]
+                     (+ step2-value 4)))))))))
