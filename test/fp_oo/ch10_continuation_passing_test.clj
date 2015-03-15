@@ -61,3 +61,32 @@
               (-> (* step1-value 3)
                   ((fn [step2-value]
                      (+ step2-value 4)))))))))
+
+;; 10.3
+(fact "ex1 - continuation-passing style conversion"
+  (-> (concat '(a b c) '(d e f))
+      ((fn [a]
+         (-> (count a)
+             ((fn [b]
+                (odd? b)))))))
+  => (let [a (concat '(a b c) '(d e f))
+           b (count a)]
+       (odd? b)))
+
+(fact "ex2 - alternate solution continuation-passing style conversion"
+  (-> '(d e f)
+      ((fn [list-to-concat]
+         (-> (concat '(a b c) list-to-concat)
+             ((fn [list-to-count]
+                (-> (count list-to-count)
+                    ((fn [candidate]
+                       (odd? candidate))))))))))
+  => (odd? (count (concat '(a b c) '(d e f)))))
+
+(fact "ex3 - another conversion"
+  (-> 3
+      ((fn [operand]
+         (-> (+ 2 operand)
+             ((fn [num-to-inc]
+                (inc num-to-inc)))))))
+  => (-> 3 (+ 2) inc))
