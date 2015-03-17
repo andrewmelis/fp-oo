@@ -9,3 +9,10 @@
 (def non-prime-multiples-less-than-100
   (fn [number]
     (multiples number 101)))
+
+;;ex2
+(def non-primes-with-for
+  (fn []
+    (set (for [n (range 2 101)
+          non-primes (non-prime-multiples-less-than-100 n)]
+      (identity non-primes)))))
