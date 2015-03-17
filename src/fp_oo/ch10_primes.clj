@@ -27,5 +27,4 @@
 
 ;; ex3
 (def primes-less-than-100
-  (fn []
-    (difference (set (range 2 101)) (set non-primes-with-sequence-monad))))
+    (remove (set non-primes-with-sequence-monad) (range 2 101)))

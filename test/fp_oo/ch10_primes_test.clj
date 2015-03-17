@@ -29,6 +29,6 @@
     (set non-primes-with-sequence-monad)
     => (set non-primes-with-for))
   (fact "ex3 - calculate all the primes with sets"
-    (primes-less-than-100)
+    (set primes-less-than-100)
     => (set '(2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83
                  89 97))))
