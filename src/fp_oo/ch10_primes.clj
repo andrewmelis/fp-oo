@@ -15,19 +15,17 @@
 
 ;;ex2
 (def non-primes-with-for
-  (fn []
-    (set (for [n (range 2 101)
-          non-primes (non-prime-multiples-less-than-100 n)]
-      (identity non-primes)))))
+  (for [n (range 2 101)
+        non-primes (non-prime-multiples-less-than-100 n)]
+    non-primes))
 
 (def non-primes-with-sequence-monad
-  (fn []
-    (set (with-monad sequence-m
-           (domonad [n (range 2 101)
-                     non-primes (non-prime-multiples-less-than-100 n)]
-                    (identity non-primes))))))
+  (with-monad sequence-m
+    (domonad [n (range 2 101)
+              non-primes (non-prime-multiples-less-than-100 n)]
+             non-primes)))
 
 ;; ex3
 (def primes-less-than-100
   (fn []
-    (difference (set (range 2 101)) (non-primes-with-sequence-monad))))
+    (difference (set (range 2 101)) (set non-primes-with-sequence-monad))))
