@@ -1,6 +1,7 @@
 (ns fp-oo.ch10-primes)
 
 (use 'clojure.algo.monads)
+(use 'clojure.set)
 
 ;; ex1
 (def multiples
@@ -25,3 +26,8 @@
            (domonad [n (range 2 101)
                      non-primes (non-prime-multiples-less-than-100 n)]
                     (identity non-primes))))))
+
+;; ex3
+(def primes-less-than-100
+  (fn []
+    (difference (set (range 2 101)) (non-primes-with-sequence-monad))))
