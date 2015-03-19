@@ -1,5 +1,6 @@
 (ns fp-oo.ch11-zipper-test
   (require [midje.sweet :refer :all]
+           [fp-oo.ch11-zipper :refer :all]
            [clojure.zip :as zip]))
 
 (fact "insane"
@@ -106,4 +107,7 @@
     (new-way-factorial 5)
     => (old-way-factorial 5)))
 
-
+;; ex1
+(fact "all-vectors collects all the vectors in a tree"
+  (all-vectors '(fn [a b] (concat [a] [b])))
+  => '([a b] [a] [b]))
