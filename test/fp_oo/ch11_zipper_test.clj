@@ -111,3 +111,15 @@
 (fact "all-vectors collects all the vectors in a tree"
   (all-vectors '(fn [a b] (concat [a] [b])))
   => '([a b] [a] [b]))
+
+;; ex2
+(facts "first-vector returns only the first vector in a tree"
+  (fact "it returns the first vector when there are >= 1 vectors in the tree"
+    (first-vector '(fn [a b] (concat [a] [b])))
+    => '[a b])
+  (fact "it returns nil if there is no vector in the tree"
+    (first-vector '(1 2))
+    => nil)
+  (fact "the easy way is cheating"
+    (easy-first-vector '(fn [a b] (concat [a] [b])))
+    => '[a b]))
